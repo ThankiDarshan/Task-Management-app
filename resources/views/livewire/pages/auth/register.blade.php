@@ -15,6 +15,9 @@ new #[Layout('layouts.guest')] class extends Component
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
+    public string $phone = '';
+    public string $type = '';
+    public string $designation = '';
 
     /**
      * Handle an incoming registration request.
@@ -25,6 +28,9 @@ new #[Layout('layouts.guest')] class extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            // 'phone' => ['required', 'integer', 'max:10'],
+            // 'type' => ['required', 'string', 'max:255'],
+            // 'designation' => ['required', 'designation', 'max:255'],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -52,7 +58,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
-
+        
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
@@ -75,6 +81,37 @@ new #[Layout('layouts.guest')] class extends Component
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
+
+        
+
+        <!-- phone -->
+        {{-- <div class="mt-4">
+            <x-input-label for="phone" :value="__('Phone')" />
+            <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="number" name="phone" required autofocus autocomplete="phone" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div> --}}
+
+        <!-- Type -->
+        {{-- <div class="mt-4">
+            <x-input-label for="type" :value="__('Select role')" />
+            
+            <x-type-dropdown type="__('Select role')" class="block mt-1 w-full"/>
+             --}}
+            {{-- <x-text-input wire:model="type" id="type" class="block mt-1 w-full" type="select" name="type" required autofocus autocomplete="type" /> --}}
+            {{-- <x-input-error :messages="$errors->get('type')" class="mt-2" />
+        </div> --}}
+
+
+        <!-- Designation -->
+        {{-- <div class="mt-4">
+            <x-input-label for="designation" :value="__('Designation')" />
+            <x-text-input wire:model="designation" id="designation" class="block mt-1 w-full" type="dropdown" name="designation" required autofocus autocomplete="designation" />
+            <x-input-error :messages="$errors->get('designation')" class="mt-2" />
+        </div> --}}
+
+
+
+        
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}" wire:navigate>
